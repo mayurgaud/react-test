@@ -28,6 +28,14 @@ class App extends Component {
 
   render() {
     const {selectedReddit, posts, isFetching} = this.props;
+    let transactions = [];
+    transactions = posts.map(post => ({
+      activityId: post.activity.id,
+      transactionType: post.transaction_type.name,
+      valueData: post.value_date,
+      value: post.value,
+      currencyCode: post.currency.code
+      }));
 
     const isEmpty = posts.length === 0;
     return (
@@ -52,7 +60,7 @@ class App extends Component {
         {isEmpty
           ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           : <div style={{opacity: isFetching ? 0.5 : 1}}>
-          <Posts posts={posts}/>
+          <Posts posts={transactions}/>
         </div>
         }
       </div>

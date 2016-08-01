@@ -6,8 +6,8 @@ export default class Posts extends Component {
   render() {
     return (
       <FlexTable
-        width={1000}
-        height={1000}
+        width={1200}
+        height={600}
         headerHeight={20}
         rowHeight={30}
         rowCount={this.props.posts.length}
@@ -17,18 +17,18 @@ export default class Posts extends Component {
       >
         <FlexColumn
           label='Activity Id'
-          dataKey='activity.id'
-          width={250}
+          dataKey='activityId'
+          width={400}
         />
         <FlexColumn
           width={250}
           label='Transaction Type'
-          dataKey='transaction_type'
+          dataKey='transactionType'
         />
         <FlexColumn
           width={250}
           label='Value Date'
-          dataKey='value_date'
+          dataKey='valueData'
         />
         <FlexColumn
           width={250}
@@ -36,9 +36,9 @@ export default class Posts extends Component {
           dataKey='value'
         />
         <FlexColumn
-          width={250}
+          width={300}
           label='Currency Code'
-          dataKey='value'
+          dataKey='currencyCode'
         />
       </FlexTable>
     )
