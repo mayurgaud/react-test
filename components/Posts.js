@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {FlexTable, FlexColumn} from 'react-virtualized';
+import {FlexTable, FlexColumn, InfiniteLoader} from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 export default class Posts extends Component {
