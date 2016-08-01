@@ -1,5 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 
+/**
+ * Generates transaction type drop down.
+ *
+ */
 export default class Picker extends Component {
   render() {
     const {value, onChange, options} = this.props;

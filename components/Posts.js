@@ -1,7 +1,11 @@
-import React, { PropTypes, Component } from 'react'
+import React, {PropTypes, Component} from 'react'
 import {FlexTable, FlexColumn, InfiniteLoader} from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
+/**
+ * Generates view for transactions.
+ *
+ */
 export default class Posts extends Component {
   render() {
     return (
@@ -47,4 +51,4 @@ export default class Posts extends Component {
 
 Posts.propTypes = {
   posts: PropTypes.array.isRequired
-}
+};

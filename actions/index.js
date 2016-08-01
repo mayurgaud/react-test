@@ -4,6 +4,12 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SELECT_REDDIT = 'SELECT_REDDIT';
 
+/**
+ * Select post action.
+ *
+ * @param reddit
+ * @returns {{type: string, reddit: *}}
+ */
 export function selectReddit(reddit) {
   return {
     type: SELECT_REDDIT,
@@ -11,6 +17,12 @@ export function selectReddit(reddit) {
   }
 }
 
+/**
+ * Request posts action.
+ *
+ * @param transactionType
+ * @returns {{type: string, transactionType: *}}
+ */
 function requestPosts(transactionType) {
   return {
     type: REQUEST_POSTS,
@@ -18,6 +30,13 @@ function requestPosts(transactionType) {
   }
 }
 
+/**
+ * Receive posts action.
+ *
+ * @param reddit
+ * @param json
+ * @returns {{type: string, reddit: *, posts: (number|*), receivedAt: number}}
+ */
 function receivePosts(reddit, json) {
   return {
     type: RECEIVE_POSTS,
@@ -27,6 +46,12 @@ function receivePosts(reddit, json) {
   }
 }
 
+/**
+ * Fetches transactions from the api based on the transaction type.
+ *
+ * @param transactionType
+ * @returns {function(*)}
+ */
 function fetchPosts(transactionType) {
   return dispatch => {
     dispatch(requestPosts(transactionType));
@@ -37,6 +62,13 @@ function fetchPosts(transactionType) {
   }
 }
 
+/**
+ * Check if the state has transactions or not of a particular transaction type.
+ *
+ * @param state
+ * @param transactionType
+ * @returns {boolean}
+ */
 function shouldFetchPosts(state, transactionType) {
   const posts = state.postsByReddit[transactionType];
   if (!posts) {
@@ -47,6 +79,12 @@ function shouldFetchPosts(state, transactionType) {
   }
 }
 
+/**
+ * Fetches transactions when requested.
+ *
+ * @param transactionType
+ * @returns {function(*, *)}
+ */
 export function fetchPostsIfNeeded(transactionType) {
   return (dispatch, getState) => {
     if (shouldFetchPosts(getState(), transactionType)) {
