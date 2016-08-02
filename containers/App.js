@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {selectReddit, fetchPostsIfNeeded} from '../actions'
+import {selectTransaction, fetchPostsIfNeeded} from '../actions'
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
 
@@ -11,23 +11,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const {dispatch, selectedReddit} = this.props;
-    dispatch(fetchPostsIfNeeded(selectedReddit))
+    const {dispatch, selectedTransaction} = this.props;
+    dispatch(fetchPostsIfNeeded(selectedTransaction))
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedReddit !== this.props.selectedReddit) {
-      const {dispatch, selectedReddit} = nextProps;
-      dispatch(fetchPostsIfNeeded(selectedReddit))
+    if (nextProps.selectedTransaction !== this.props.selectedTransaction) {
+      const {dispatch, selectedTransaction} = nextProps;
+      dispatch(fetchPostsIfNeeded(selectedTransaction))
     }
   }
 
-  handleChange(nextReddit) {
-    this.props.dispatch(selectReddit(nextReddit))
+  handleChange(nextTransaction) {
+    this.props.dispatch(selectTransaction(nextTransaction))
   }
 
   render() {
-    const {selectedReddit, posts, isFetching} = this.props;
+    const {selectedTransaction, posts, isFetching} = this.props;
     let transactions = [];
     transactions = posts.map(post => ({
       activityId: post.activity.id,
@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <div>
         <Picker
-          value={selectedReddit}
+          value={selectedTransaction}
           onChange={this.handleChange}
           options={[
             '',
@@ -69,7 +69,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  selectedReddit: PropTypes.string.isRequired,
+  selectedTransaction: PropTypes.string.isRequired,
   posts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
@@ -77,18 +77,18 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const {selectedReddit, postsByReddit} = state;
+  const {selectedTransaction, postsByTransaction} = state;
   const {
     isFetching,
     lastUpdated,
     items: posts
-  } = postsByReddit[selectedReddit] || {
+  } = postsByTransaction[selectedTransaction] || {
     isFetching: true,
     items: []
   };
 
   return {
-    selectedReddit,
+    selectedTransaction,
     posts,
     isFetching,
     lastUpdated

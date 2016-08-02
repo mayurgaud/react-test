@@ -2,18 +2,18 @@ import fetch from 'isomorphic-fetch'
 
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const SELECT_REDDIT = 'SELECT_REDDIT';
+export const SELECT_TRANSACTION = 'SELECT_TRANSACTION';
 
 /**
  * Select post action.
  *
- * @param reddit
- * @returns {{type: string, reddit: *}}
+ * @param transaction
+ * @returns {{type: string, transaction: *}}
  */
-export function selectReddit(reddit) {
+export function selectTransaction(transaction) {
   return {
-    type: SELECT_REDDIT,
-    reddit
+    type: SELECT_TRANSACTION,
+    transaction
   }
 }
 
@@ -33,14 +33,14 @@ function requestPosts(transactionType) {
 /**
  * Receive posts action.
  *
- * @param reddit
+ * @param transaction
  * @param json
- * @returns {{type: string, reddit: *, posts: (number|*), receivedAt: number}}
+ * @returns {{type: string, transaction: *, posts: (number|*), receivedAt: number}}
  */
-function receivePosts(reddit, json) {
+function receivePosts(transaction, json) {
   return {
     type: RECEIVE_POSTS,
-    reddit,
+    transaction,
     posts: json.results,
     receivedAt: Date.now()
   }
@@ -56,7 +56,7 @@ function fetchPosts(transactionType) {
   return dispatch => {
     dispatch(requestPosts(transactionType));
 
-    return fetch(`https://www.oipa.nl/api/transactions/?format=json&transaction_type=${transactionType}&fields=activity,transaction_type,value_date,value,currency`)
+    return fetch(`https://www.oipa.nl/api/transactions/?format=json&transaction_type=${transactionType}&page_size=100&fields=activity,transaction_type,value_date,value,currency`)
       .then(response => response.json())
       .then(json => dispatch(receivePosts(transactionType, json)))
   }
@@ -70,7 +70,7 @@ function fetchPosts(transactionType) {
  * @returns {boolean}
  */
 function shouldFetchPosts(state, transactionType) {
-  const posts = state.postsByReddit[transactionType];
+  const posts = state.postsByTransaction[transactionType];
   if (!posts) {
     return true
   }

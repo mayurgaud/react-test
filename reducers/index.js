@@ -1,13 +1,13 @@
 import {combineReducers} from 'redux'
 import {
-  SELECT_REDDIT,
+  SELECT_TRANSACTION,
   REQUEST_POSTS, RECEIVE_POSTS
 } from '../actions'
 
-function selectedReddit(state = '', action) {
+function selectedTransaction(state = '', action) {
   switch (action.type) {
-    case SELECT_REDDIT:
-      return action.reddit;
+    case SELECT_TRANSACTION:
+      return action.transaction;
     default:
       return state
   }
@@ -33,12 +33,12 @@ function posts(state = {
   }
 }
 
-function postsByReddit(state = {}, action) {
+function postsByTransaction(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
       return Object.assign({}, state, {
-        [action.reddit]: posts(state[action.reddit], action)
+        [action.transaction]: posts(state[action.transaction], action)
       });
     default:
       return state
@@ -46,8 +46,8 @@ function postsByReddit(state = {}, action) {
 }
 
 const rootReducer = combineReducers({
-  postsByReddit,
-  selectedReddit
+  postsByTransaction,
+  selectedTransaction
 });
 
 export default rootReducer
