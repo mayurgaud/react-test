@@ -56,7 +56,7 @@ function fetchPosts(transactionType) {
   return dispatch => {
     dispatch(requestPosts(transactionType));
 
-    return fetch(`https://www.oipa.nl/api/transactions/?format=json&transaction_type=${transactionType}&page_size=100&fields=activity,transaction_type,value_date,value,currency`)
+    return fetch(`https://www.oipa.nl/api/transactions/?format=json&transaction_type=${transactionType}&page_size=1000&fields=activity,transaction_type,value_date,value,currency`)
       .then(response => response.json())
       .then(json => dispatch(receivePosts(transactionType, json)))
   }
