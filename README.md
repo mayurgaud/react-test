@@ -6,7 +6,7 @@ This is a test project, is to showcase the level of competence and analytical wa
 
 Requirements for this project are taken from the `React Assessment 07-2016.pdf` shared by client.
 
-This test has been done by developer `Mayur`.
+Developer `Mayur` has done this test.
 
 ## Technology Stack
 1. React
@@ -15,11 +15,11 @@ This test has been done by developer `Mayur`.
 
 ## Folder Structure
 
-To separate different components of the project, we have arranged them in different folders as follow:
+    To separate different components of the project, we have arranged them in different folders as follow:
 1. actions
     - Fetch data from API
     - Responsible for sending data from application to store.
-2. componenets
+2. components
     - It creates view for rendering content on the screen.
       - Picker - Used for drop down filtering on basis on transaction type
       - Posts - Used for show the list of transaction fetch from the API
@@ -33,7 +33,7 @@ To separate different components of the project, we have arranged them in differ
 
 ## Task Completed
 1. Build a small react app
-2. show a (filterable) list of IATI transactions.
+2. Show a (filterable) list of IATI transactions.
 
 ## Task Pending
 1. Virtual scroll using React-virtualized.
