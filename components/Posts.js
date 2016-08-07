@@ -3,7 +3,6 @@ import {FlexTable, FlexColumn, InfiniteLoader} from 'react-virtualized';
 import shallowCompare from 'react-addons-shallow-compare'
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
-
 const STATUS_LOADING = 1;
 const STATUS_LOADED = 2;
 
@@ -18,13 +17,11 @@ export default class Posts extends Component {
     this.state = {
       loadedRowCount: 0,
       loadedRowsMap: {},
-      loadingRowCount: 0,
-      randomScrollToIndex: null
+      loadingRowCount: 0
     };
 
     this._timeoutIdMap = {};
 
-    this._clearData = this._clearData.bind(this);
     this._isRowLoaded = this._isRowLoaded.bind(this);
     this._loadMoreRows = this._loadMoreRows.bind(this);
   }
@@ -39,19 +36,26 @@ export default class Posts extends Component {
     return shallowCompare(this, nextProps, nextState)
   }
 
-  _clearData() {
-    this.setState({
-      loadedRowCount: 0,
-      loadedRowsMap: {},
-      loadingRowCount: 0
-    })
-  }
-
+  /**
+   * Check if the rows are loaded or loading.
+   *
+   * @param index
+   * @returns {boolean}
+   * @private
+   */
   _isRowLoaded({index}) {
     const {loadedRowsMap} = this.state;
     return !!loadedRowsMap[index]; // STATUS_LOADING or STATUS_LOADED
   }
 
+  /**
+   * Fetch more rows to show in list.
+   *
+   * @param startIndex
+   * @param stopIndex
+   * @returns {Promise}
+   * @private
+   */
   _loadMoreRows({startIndex, stopIndex}) {
     const {loadedRowsMap, loadingRowCount} = this.state;
     const increment = stopIndex - startIndex + 1;
@@ -91,7 +95,7 @@ export default class Posts extends Component {
   }
 
   render() {
-    const {loadedRowCount, loadingRowCount, randomScrollToIndex} = this.state;
+    const {loadedRowCount, loadingRowCount} = this.state;
 
     return (
       <div>
