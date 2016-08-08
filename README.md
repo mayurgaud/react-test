@@ -34,10 +34,7 @@ Developer `Mayur` has done this test.
 ## Task Completed
 1. Build a small react app
 2. Show a (filterable) list of IATI transactions.
-
-## Task Pending
-1. Virtual scroll using React-virtualized.
-
+3. Infinite scroll using React-virtualized.
 
 ## Project setup
 
